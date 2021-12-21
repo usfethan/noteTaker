@@ -1,13 +1,13 @@
 {
   "notes": [
     {
-      "title": "lunch",
-      "text": "friends",
-      "id": "0"
+      "title": "Shopping",
+      "text": "Tomato\nParsley\nLemon\nSalmon",
+      "id": "2"
     },
     {
-      "title": "dinner",
-      "text": "family",
+      "title": "meeting",
+      "text": "call all department",
       "id": "1"
     }
   ]
