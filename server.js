@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const { notes } = require("./db/db.json");
-const { off } = require("process");
+
 
 function createNewNote (body, notesArray) {
     const note = body;
@@ -36,10 +36,30 @@ function validateNote (note) {
         res.json(notes);
     });
     
-  
-}
+  app.post("/api/notes", (req, res) => {
+      req.body.id = notes.length.toString();
+      if(!validateNote(req.body)) {
+          res.status(400).send(err);
+      } else {
+          const note = createNewNote(req.body, notes);
+          res.json(note);
+      }
+  });
+
+  app.delete("/api/notes/:id", (req, res) => {
+      const id = req.params.id;
+      let note;
+
+      notes.map((element, index) => {
+          if(element.id == id) {
+              note = element
+              notes.splice(index, 1)
+              return res.json(note);
+          }
+      })
+  });
 
 
 app.listen(PORT, () =>
     console.log(`Server listening at http://localhost:${PORT}`)
-);
+)};
