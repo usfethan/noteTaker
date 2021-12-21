@@ -29,8 +29,10 @@ function validateNote (note) {
         return false;
     } 
     if (!note.text || typeof note.text !== "string") {
-        return true;
-    };
+        return false;
+    }
+    return true;
+};
 
     app.get("/api/notes", (req, res) => {
         res.json(notes);
@@ -59,7 +61,16 @@ function validateNote (note) {
       })
   });
 
+  app.get("/", (req, res) => {
+      res.sendFile(path.join(__dirname, "./public/index.html"));
+  });
 
-app.listen(PORT, () =>
-    console.log(`Server listening at http://localhost:${PORT}`)
-)};
+  app.get("/notes", (req, res) => {
+      res.sendFile(path.join(__dirname, "./public/notes.html"));
+  });
+
+
+
+  app.listen(PORT, () => {
+      console.log(`Server listening at http://localhost:${PORT}`)
+  });
